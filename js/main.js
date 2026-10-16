@@ -11,7 +11,7 @@
   if (email) { email.href = `mailto:${cfg.email || 'contato@exemplo.com'}`; email.textContent = cfg.email || 'E-mail de contato'; }
   if (cfg.instagram && /^https:\/\//.test(cfg.instagram)) { $('#instagramLink').href = cfg.instagram; $('#instagramLink').hidden = false; }
   $$('.whatsapp-link').forEach(a => {
-    if (validPhone) { a.href = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(a.dataset.message || 'Olá! Gostaria de solicitar um orçamento.')}`; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    if (validPhone) { a.href = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(cfg.whatsappMessage || a.dataset.message || 'Olá! Gostaria de solicitar um orçamento.')}`; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
     else { a.href = '#contato'; a.title = 'Configure o WhatsApp no arquivo js/config.js'; }
   });
   const toggle = $('#menuToggle'), nav = $('#mainNav');
