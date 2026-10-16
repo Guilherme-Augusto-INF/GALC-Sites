@@ -308,3 +308,55 @@ body:has(.legal) .header-inner{height:auto;min-height:78px;flex-wrap:wrap;gap:16
 .extra-services>.plan-action{width:auto}
 @media(max-width:980px){.plans{grid-template-columns:1fr;max-width:650px;margin-inline:auto}.plans .plan-top>p{min-height:0}.plans .plan ul{flex:none}.extras-list{grid-template-columns:1fr}}
 @media(max-width:420px){.extras-list>div{grid-template-columns:1fr;gap:6px}}
+
+
+/* GALC V2.3 — refinamento editorial progressivo, preservando layout e funcionalidades. */
+:root{--blue:#355bee;--navy:#151a23;--ink:#151a23;--soft:#f7f6f2;--border:#d9dee6;--radius:10px}
+html{scroll-padding-top:92px}
+body{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;letter-spacing:-.008em}
+h1,h2,h3{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;text-wrap:balance}
+p,li,dd{ text-wrap:pretty }
+.header{box-shadow:0 2px 14px rgba(21,26,35,.035)}
+.brand-symbol{background:var(--ink);border-radius:6px}
+.nav-cta,.button{border-radius:6px}
+.hero{position:relative;isolation:isolate;background:#f7f6f2}
+.hero::after{content:"";position:absolute;z-index:-1;inset:auto 0 0;height:1px;background:#d9dee6}
+.hero-grid{gap:clamp(30px,5vw,90px)}
+.hero h1{font-weight:800;letter-spacing:-.068em;max-width:780px}
+.hero h1 em{font-style:normal;color:var(--blue)}
+.hero-copy>p{max-width:55ch}
+.hero-trust{border-top:1px solid #d2d6df;padding-top:20px;margin-top:34px}
+.hero-trust span{display:inline-flex;align-items:center;gap:8px}
+.hero-trust span::before{content:"";width:5px;height:5px;background:var(--blue);border-radius:50%;flex:none}
+.project-sheet{border:1px solid #d5dbe5;border-top:5px solid var(--blue);box-shadow:14px 16px 0 #e6e9ef;position:relative}
+.project-sheet::after{content:"";position:absolute;right:24px;bottom:22px;width:32px;height:32px;border:1px solid #d6dce6;border-radius:50%;pointer-events:none}
+.sheet-top{letter-spacing:.045em}
+.project-sheet dl>div{transition:background-color .2s ease,padding-left .2s ease}
+.project-sheet dl>div:hover{background:#f7f8fc;padding-left:8px}
+.proof-strip{background:var(--navy)}
+.proof-inner{letter-spacing:.025em}
+.section-header h2,.center-head h2,.delivery-grid h2{font-weight:770;letter-spacing:-.06em}
+#servicos{background:#f7f6f2}
+.plans{align-items:stretch}
+.plan{border:1px solid #d5dbe4;background:#fff;box-shadow:none;transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.plan:hover{border-color:#aebbd9;transform:translateY(-3px);box-shadow:0 18px 32px rgba(21,26,35,.07)}
+.plan.featured{border:2px solid var(--blue);box-shadow:0 12px 38px rgba(53,91,238,.085)}
+.plan.featured:hover{box-shadow:0 20px 45px rgba(53,91,238,.12)}
+.plan .price{border-bottom:1px solid #e4e7ed;padding-bottom:16px}
+.plan .price strong{font-variant-numeric:tabular-nums;letter-spacing:-.055em}
+.showcase-grid{align-items:start}
+.showcase{background:transparent;border:0;box-shadow:none}
+.showcase-visual{display:block;overflow:hidden;border-radius:8px;outline-offset:4px;transition:box-shadow .25s ease,transform .25s ease}
+.showcase-visual:hover,.showcase-visual:focus-visible{transform:translateY(-4px);box-shadow:0 24px 40px rgba(21,26,35,.16)}
+.showcase-meta{padding-top:20px}
+.case-type{font-size:11px;letter-spacing:.075em}
+.case-cta{text-decoration-thickness:1px;text-underline-offset:5px}
+.delivery-list>div{transition:border-color .2s ease}
+.delivery-list>div:hover{border-color:#adc0ff}
+.steps article{border-top:2px solid #c6cedb}
+.steps article>span{color:#355bee}
+.contact-form{box-shadow:0 20px 50px rgba(21,26,35,.055)}
+.button:focus-visible,.showcase a:focus-visible,.nav a:focus-visible{outline:3px solid #355bee;outline-offset:4px}
+@media(max-width:980px){.project-sheet{box-shadow:8px 9px 0 #e6e9ef}.plan:hover{transform:none}}
+@media(max-width:760px){.hero-trust{gap:10px 18px}.project-sheet{box-shadow:none}.project-sheet::after{display:none}.showcase-visual:hover{transform:none}.section-header h2,.center-head h2{text-wrap:balance}}
+@media(prefers-reduced-motion:reduce){.plan,.showcase-visual,.project-sheet dl>div,.delivery-list>div{transition:none!important}.plan:hover,.showcase-visual:hover{transform:none!important}}
