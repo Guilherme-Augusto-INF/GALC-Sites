@@ -1,4 +1,4 @@
-# GALC-Sites — V2.1
+# GALC-Sites — V2.2
 
 Site institucional estático para apresentar serviços de desenvolvimento web, demonstrar possibilidades e receber solicitações de orçamento.
 
@@ -34,11 +34,17 @@ O número atual é temporário. Não copie o número para novos componentes. Ao 
 
 A Access Key pública do Web3Forms já está configurada. **Não substitua nem reproduza a chave na documentação.** Tokens privados nunca devem ser incluídos no frontend. E-mail e Instagram só aparecem no rodapé quando configurados.
 
-Preços não definidos são exibidos como **Sob consulta**. Quantidade de páginas/seções, revisões, integrações, manutenção, domínio e hospedagem dependem da proposta. Não transforme os exemplos em promessas de entrega sem aprovação do responsável.
+Preços centralizados em **prices, no js/config.js**, e renderizados por atributos data-price. Valores aprovados: Básico a partir de R$ 790, Profissional a partir de R$ 1.490 e Loja a partir de R$ 3.490. Os serviços complementares também ficam nesse objeto; não duplique preços em novos componentes. O HTML usa “Sob consulta” como fallback sem JavaScript. Quantidade de páginas/seções, revisões, integrações, manutenção, domínio e hospedagem dependem da proposta. Não transforme os exemplos em promessas de entrega sem aprovação do responsável.
+
+## Escopos comerciais
+
+Básico: uma página com até 3 seções e uma rodada; 5–10 dias úteis. Profissional: uma página com até 6 seções, protótipo e duas rodadas; 10–15 dias úteis. Loja: plataforma existente, até 20 produtos e revisões definidas na proposta; 15–30 dias úteis. Prazos após recebimento dos materiais e aprovação do escopo. Seção é um bloco da página, não outra página.
+
+Manutenção básica: até uma hora mensal e verificações básicas. Manutenção com conteúdo: franquia definida na proposta, nunca ilimitada. Plataforma, gateway, domínio, hospedagem paga, produção de conteúdo e extras têm custos separados quando necessários. Valores não são garantia de preço final.
 
 ## Formulário
 
-O `POST` vai para o Web3Forms. O JavaScript usa `FormData`, honeypot, validação dos campos e do telefone, bloqueio de submissão simultânea e timeout de 12 segundos. Uma resposta de sucesso limpa os dados e restaura a Access Key. Uma falha mantém os campos preenchidos para nova tentativa e oferece o WhatsApp como alternativa.
+O `POST` vai para o Web3Forms. O JavaScript usa `FormData`, honeypot, validação dos campos e do telefone, bloqueio de submissão simultânea e timeout de 12 segundos. Uma resposta de sucesso limpa os dados e restaura a Access Key. Uma falha mantém os campos preenchidos para nova tentativa e oferece o WhatsApp como alternativa. Orçamento previsto é opcional, limitado a 80 caracteres; enviado pelo mesmo FormData. Selecionar um plano altera o tipo de projeto e apenas o texto gerado automaticamente, preservando os demais dados.
 
 Para validar sem enviar mensagens, execute testes isolados com respostas simuladas. Para um teste completo, use no máximo o necessário, identifique como **TESTE TÉCNICO**, use dados fictícios e confira o recebimento. Sucesso da API não prova chegada na caixa postal. Não envie mensagens reais pelo WhatsApp durante testes.
 
