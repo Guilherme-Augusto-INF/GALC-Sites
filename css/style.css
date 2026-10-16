@@ -42,3 +42,6 @@ body:has(.legal) .header-inner{height:auto;min-height:78px;flex-wrap:wrap;gap:16
 .browser-url,.mock-nav,.mock-stats span,.case-type{color:#566174}
 .dark-section .section-header.light .kicker{color:#adc0ff}
 .cta-inner>div>span{color:#fff}
+
+/* No tablet, separa a ilustração do texto para evitar sobreposição. */
+@media(min-width:761px) and (max-width:1060px){.hero-grid{grid-template-columns:1fr;gap:32px}.hero-copy{max-width:720px}.hero-art{width:100%;max-width:600px;margin-inline:auto;transform:none}}
