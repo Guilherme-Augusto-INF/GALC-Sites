@@ -4,11 +4,11 @@
   const $ = (q) => document.querySelector(q);
   const $$ = (q) => document.querySelectorAll(q);
   const validPhone = /^\d{11,15}$/.test(cfg.whatsapp || '');
-  $$('[data-brand]').forEach(el => el.textContent = cfg.brand || 'Estúdio Web');
+  $$('[data-brand]').forEach(el => el.textContent = cfg.brand || 'GALC-Sites');
   $$('[data-price]').forEach(el => el.textContent = cfg.prices?.[el.dataset.price] || 'Sob consulta');
   $('#year').textContent = new Date().getFullYear();
   const email = $('#footerEmail');
-  if (email) { email.href = `mailto:${cfg.email || 'contato@exemplo.com'}`; email.textContent = cfg.email || 'E-mail de contato'; }
+  if (email) { const address = (cfg.email || '').trim(); if (address && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) { email.href = `mailto:${address}`; email.textContent = address; email.hidden = false; } else { email.hidden = true; email.removeAttribute('href'); } }
   if (cfg.instagram && /^https:\/\//.test(cfg.instagram)) { $('#instagramLink').href = cfg.instagram; $('#instagramLink').hidden = false; }
   $$('.whatsapp-link').forEach(a => {
     if (validPhone) { a.href = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(cfg.whatsappMessage || a.dataset.message || 'Olá! Gostaria de solicitar um orçamento.')}`; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
@@ -20,7 +20,7 @@
     toggle.setAttribute('aria-expanded', String(!expanded)); nav.classList.toggle('open', !expanded);
     toggle.setAttribute('aria-label', expanded ? 'Abrir menu' : 'Fechar menu');
   });
-  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false');}));
+  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Abrir menu');}));
   $$('.plan-action').forEach(a => a.addEventListener('click', () => {
     const select = $('#projectType'); const plan = a.dataset.plan || '';
     const known = [...select.options].find(opt => opt.value === plan);
@@ -44,6 +44,8 @@
       if (!response.ok || !data.success) throw new Error('Falha no envio');
       feedback.textContent = 'Mensagem enviada com sucesso! Entraremos em contato pelo número informado.';
       form.reset();
+      // O reset limpa campos hidden também; restaura a chave para um novo envio.
+      if (accessInput) accessInput.value = cfg.web3formsAccessKey || '';
     } catch { feedback.textContent = 'Não foi possível enviar. Verifique sua conexão e tente novamente ou utilize o WhatsApp.'; feedback.classList.add('error'); }
     finally { button.disabled = false; button.textContent = 'Enviar solicitação ↗'; }
   });
