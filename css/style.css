@@ -2,8 +2,8 @@
 
 /* GALC-Sites 2026 — direção visual editorial: foco em projetos, sem efeitos desnecessários */
 :root{--navy:#151a23;--blue:#355bee;--gold:#355bee;--ink:#151a23;--muted:#69717f;--soft:#f7f6f2;--border:#e2e2df;--radius:12px}
-body{font-family:"Manrope","Segoe UI",system-ui,sans-serif;background:#fff;color:var(--ink)}
-h1,h2,h3{font-family:"Manrope","Segoe UI",system-ui,sans-serif;letter-spacing:-.055em}
+body{font-family:"Segoe UI",Arial,system-ui,sans-serif;background:#fff;color:var(--ink)}
+h1,h2,h3{font-family:"Segoe UI",Arial,system-ui,sans-serif;letter-spacing:-.055em}
 .header{background:rgba(255,255,255,.97);border-bottom:1px solid #e8e8e5;backdrop-filter:blur(12px)}
 .brand{font-weight:850;letter-spacing:-.07em}
 .brand-symbol{background:#151a23;border-radius:7px;letter-spacing:-3px}
