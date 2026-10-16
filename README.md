@@ -1,90 +1,100 @@
-# Estúdio Web — site institucional estático
+# GALC-Sites — V2.1
 
-## O que vem pronto
-- HTML, CSS, JavaScript puro, sem etapa de compilação, sem framework e sem dependências pagas obrigatórias.
-- Página principal e três demonstrações navegáveis (barbearia, restaurante e consultório).
-- Layout responsivo, menu mobile, FAQ nativo, botões de WhatsApp com texto, cards de serviços, formulário com Web3Forms, gerenciamento básico de consentimento, SEO e cabeçalhos de segurança.
-- Política de privacidade e termos em rascunho (devem passar por revisão e personalização).
+Site institucional estático para apresentar serviços de desenvolvimento web, demonstrar possibilidades e receber solicitações de orçamento.
+
+- Produção: https://galc-sites.pages.dev/
+- Repositório: https://github.com/Guilherme-Augusto-INF/GALC-Sites
+- HTML, CSS e JavaScript puro. Sem build, framework ou bibliotecas de terceiros no frontend.
+- Cloudflare Pages com integração GitHub; produção na branch `main`, demais branches em preview.
 
 ## Estrutura
+
+```text
+index.html                 Página institucional e formulário
+privacidade.html           Informações de privacidade
+termos.html                 Condições de uso do site
+css/style.css              Estilos institucionais
+css/demo.css               Base compartilhada e layouts próprios dos três segmentos
+js/config.js               Marca, WhatsApp, Web3Forms, preços e tracking opcional
+js/main.js                 Navegação, planos, formulário e consentimento
+img/favicon.svg            Símbolo GALC-Sites
+img/og-image.png            Imagem de compartilhamento 1200 × 630
+img/og-image.svg            Versão vetorial da imagem de compartilhamento
+ demos/                    Demonstrações de barbearia, restaurante e consultório
+_headers                   Headers do Cloudflare Pages
+robots.txt                 Regras de rastreamento
+sitemap.xml                Apenas URLs indexáveis de produção
 ```
-index.html
-privacidade.html
-termos.html
-css/style.css
-js/config.js
-js/main.js
-img/favicon.svg
-img/og-image.svg
-demos/barbearia.html
-demos/restaurante.html
-demos/consultorio.html
-_headers
-robots.txt
-sitemap.xml
-README.md
-```
 
-## Passo 1 — personalize
-1. Edite `js/config.js`: brand, whatsapp com `55` + DDD + número sem pontuação, email, instagram, preços, chave Web3Forms.
-2. **Também edite manualmente** nome, textos e título dentro de `index.html`, `privacidade.html`, `termos.html`, campos do JSON-LD e descrições — a configuração JS substitui apenas elementos visuais marcados com `data-brand` e preços.
-3. Substitua TODAS as ocorrências de `SEU-DOMINIO.com.br` pelo domínio real em `index.html`, `robots.txt`, `sitemap.xml`.
-4. Crie artes de portfólio e depoimentos AUTÊNTICOS, com autorização antes de publicá-los. Os cards atuais estão claramente marcados como conceito e nenhum depoimento fictício está divulgado como real.
-5. Confira escopo, preços, garantia de revisões e termos comerciais; não prometa mais do que pode cumprir.
-6. Troque emails e identificação do controlador nas páginas legais e valide a política com profissional apropriado. LGPD: além de consentimento para pixels, você precisa de informação transparente, retenção, atendimento a direitos, medidas de segurança e contratos adequados com fornecedores.
-7. Para fotografia real ou cases, use imagens otimizadas (AVIF/WebP), com alt relevante e autorizações; as imagens atuais são SVG/CSS leves, sem bibliotecas ou downloads.
+## Alterar contato e configurações
 
-## Passo 2 — configurar Web3Forms (grátis)
-1. Acesse https://web3forms.com, crie uma Access Key gratuita e valide seu endereço de recebimento.
-2. Cole a chave em `js/config.js` -> `web3formsAccessKey`.
-3. O formulário envia `POST` para `https://api.web3forms.com/submit` via `fetch`, verifica resposta e exibe sucesso/erro. Sem a chave, o formulário informa claramente que não está configurado.
-4. Teste com seus dados e confira o recebimento e a pasta spam. Não dependa apenas do formulário como canal de contato.
-5. Ative proteção contra spam conforme recursos disponíveis do Web3Forms, como honeypot e proteção adicional, se necessária. Considere Turnstile/verificação backend se receber abuso. Chave pública do Web3Forms não é segredo, mas evite expor credenciais privadas no JavaScript.
+A integração WhatsApp é configurada em **um único objeto em `js/config.js`**: `whatsapp` (país + DDD + número, somente dígitos) e `whatsappMessage`. Os botões institucionais recebem a mesma URL, com codificação da mensagem e `noopener noreferrer`.
 
-## Passo 3 — testar localmente
-Execute na pasta `estudio-web`:
+O número atual é temporário. Não copie o número para novos componentes. Ao substituí-lo, confira também os links diretos já existentes nas páginas informativas; eles não são atualizados pelo JavaScript da home. Não publique número ou e-mail diferente sem confirmação do responsável.
+
+A Access Key pública do Web3Forms já está configurada. **Não substitua nem reproduza a chave na documentação.** Tokens privados nunca devem ser incluídos no frontend. E-mail e Instagram só aparecem no rodapé quando configurados.
+
+Preços não definidos são exibidos como **Sob consulta**. Quantidade de páginas/seções, revisões, integrações, manutenção, domínio e hospedagem dependem da proposta. Não transforme os exemplos em promessas de entrega sem aprovação do responsável.
+
+## Formulário
+
+O `POST` vai para o Web3Forms. O JavaScript usa `FormData`, honeypot, validação dos campos e do telefone, bloqueio de submissão simultânea e timeout de 12 segundos. Uma resposta de sucesso limpa os dados e restaura a Access Key. Uma falha mantém os campos preenchidos para nova tentativa e oferece o WhatsApp como alternativa.
+
+Para validar sem enviar mensagens, execute testes isolados com respostas simuladas. Para um teste completo, use no máximo o necessário, identifique como **TESTE TÉCNICO**, use dados fictícios e confira o recebimento. Sucesso da API não prova chegada na caixa postal. Não envie mensagens reais pelo WhatsApp durante testes.
+
+## Demonstrações
+
+Os três modelos são conceituais e permanecem `noindex,nofollow`. Não representam clientes reais, não recebem pedidos, agendamentos ou consultas e não contêm avaliações ou profissionais inventados.
+
+- **Barbearia:** composição escura, monograma conceitual e lista de serviços.
+- **Restaurante:** cardápio de leitura direta e conteúdo dividido por pratos.
+- **Consultório:** diretório de informações, leitura calma e FAQ nativo.
+
+Os CTAs de orçamento retornam a `index.html?modelo=<segmento>#contato`. A home aceita apenas os três valores conhecidos e preenche a intenção do pedido, sem sobrescrever uma mensagem personalizada. O cardápio e os serviços têm navegação interna real.
+
+## Tipografia e direção visual
+
+A página institucional preserva a família de sistema da V2 para evitar downloads de fontes e manter continuidade. O hero foi encurtado; o desenho de entrega substitui os dispositivos decorativos. As demos combinam Georgia/serif com system-ui quando a voz do segmento pede um tom editorial; o consultório usa system-ui para navegação e conteúdo. A escolha considera hierarquia, espaçamento e leitura, sem impor uma fonte única aos três segmentos.
+
+Referências consultadas:
+- https://designsystem.digital.gov/components/typography/
+- https://designsystem.digital.gov/design-tokens/typesetting/overview/
+
+## SEO
+
+Canonical, Open Graph e sitemap usam https://galc-sites.pages.dev/. A home é indexável. Páginas informativas ficam fora do sitemap por serem `noindex,follow`; demos são `noindex,nofollow`.
+
+O JSON-LD descreve um **Service**, com o provedor **Organization** GALC-Sites. Não utiliza endereço, horário físico, avaliações, preço, CNPJ ou profissional inventado. `ProfessionalService` é depreciado no Schema.org e não é usado nesta versão.
+
+Cloudflare Pages adiciona `X-Robots-Tag: noindex` aos previews por padrão. Preserve esse comportamento. Meça SEO em produção; não tente elevar a nota do preview removendo sua proteção. Indexabilidade técnica não garante indexação nem posição no Google.
+
+- https://schema.org/Service
+- https://schema.org/ProfessionalService
+- https://developers.cloudflare.com/pages/configuration/preview-deployments/
+
+## Privacidade e segurança
+
+GA4 e Meta Pixel estão desativados enquanto seus IDs estiverem vazios. Só são inicializados após aceitação. O rodapé permite reabrir as preferências. Se tracking estiver configurado, rejeitar após aceitar recarrega a página para interromper a inicialização no próximo carregamento; isso não substitui uma implementação completa de remoção de cookies e Consent Mode dos respectivos fornecedores.
+
+`_headers` restringe frames, recursos externos, permissões de câmera/microfone/localização e tipos MIME. A CSP permite os endpoints usados pelo Web3Forms e pelas integrações opcionais existentes. Ao adicionar um fornecedor, revise a política e teste os fluxos antes de publicar.
+
+As páginas informativas precisam de revisão do responsável sobre identificação do controlador, critérios de retenção e atendimento a direitos. O texto não é certificação jurídica de conformidade com a LGPD.
+
+## Desenvolvimento e publicação
+
 ```bash
 python -m http.server 8000
 ```
-Acesse `http://localhost:8000`, clique nos links, teste layout mobile, teclado, banner de privacidade e formulário após adicionar chave.
 
-## Passo 4 — deploy no Cloudflare Pages
-**Opção A — sem Git:** entre em https://dash.cloudflare.com -> Workers & Pages -> Create -> Pages / Direct Upload; envie a pasta de arquivos estáticos ou o ZIP de conteúdo e escolha um nome para o projeto. Se usar a plataforma de drag-and-drop, a pasta com `index.html` deve ser a raiz do deployment. Não precisa de build. O resultado terá URL `seu-projeto.pages.dev`.
-**Opção B — com GitHub:** coloque estes arquivos na raiz de um repositório; em Cloudflare Pages escolha conectar repositório, branch de produção, framework `None`, comando de build vazio, diretório de saída `/` ou diretório raiz conforme solicitado no painel. Novos commits geram deploy automático.
-**Atenção:** um projeto criado como Direct Upload não muda posteriormente para integração Git sem criar um novo projeto.
+Abra `http://localhost:8000`. O servidor local não aplica `_headers`: valide os headers no preview Cloudflare.
 
-## Passo 5 — domínio personalizado
-No projeto Pages abra **Custom domains** -> **Set up a domain** e digite o domínio. Se for domínio raiz (`exemplo.com.br`), o domínio deve estar adicionado como zona Cloudflare e usar seus nameservers. Se for subdomínio (`www.exemplo.com.br`), siga a orientação de CNAME do painel, apontando ao hostname do Pages. Faça associação no painel ANTES de editar manualmente o CNAME. Aguarde validação do certificado. **O domínio em si pode ser pago**, mesmo com hospedagem gratuita.
+1. Crie a branch de trabalho a partir da `main` atual.
+2. Confira mudanças recentes e preserve as configurações.
+3. Abra o PR e aguarde o preview do commit correto.
+4. Teste home e demos em 320×568, 375×812, 430×932, 768×1024, 1366×768 e 1920×1080.
+5. Valide formulário, teclado, foco, menu, FAQ, consentimento, links, console e rede. Distinga testes simulados de envios reais.
+6. Execute Lighthouse mobile e desktop. Registre data, URL e resultados reais; não copie notas antigas como medições novas.
+7. Faça merge somente após os critérios obrigatórios. Aguarde o Cloudflare Pages e confira o commit implantado.
+8. Execute smoke tests na URL de produção. Em regressão grave, reverta por novo commit ou rollback do deployment, preservando o histórico.
 
-## Passo 6 — SEO e métricas
-- Confirme URL canônica, OG, sitemap e JSON-LD com dados reais. Evite `LocalBusiness` com endereço inventado; o projeto usa `ProfessionalService`.
-- Cadastre o domínio no Google Search Console, solicite indexação e envie `/sitemap.xml`.
-- Teste em https://pagespeed.web.dev e observe Core Web Vitals reais. Não há promessa de nota 100.
-- `ga4Id` e `metaPixelId` em `js/config.js` são opcionais; scripts são carregados apenas após aceitação do visitante. Se ativar, revise obrigações de privacidade e requisitos dos respectivos provedores.
-- `localStorage` registra `accepted`/`rejected`; para oferecer alteração posterior adicione um painel "Gerenciar cookies". O mecanismo de exemplo é um ponto de partida e não garante sozinho conformidade integral à LGPD.
-- Se precisar de revogação imediata com tracking ativo, implemente controles que bloqueiem novos eventos, limpem cookies relevantes quando aplicável e recarreguem a página; reveja Consent Mode e configurações de tags com um profissional.
-
-## Checklist de publicação
-[ ] Número WhatsApp real
-[ ] Access Key Web3Forms e teste com envio de ponta a ponta
-[ ] Nome, emails, domínio e identidade reais
-[ ] Política e termos completos revisados
-[ ] Valores e escopo comercial aprovados
-[ ] Portfólio e depoimentos reais, sem avaliações inventadas
-[ ] Testes de toque, teclado, contraste e layout móvel
-[ ] Links de demonstração, formulário e FAQ testados
-[ ] Sem placeholders de domínio e marca na versão pública
-[ ] Search Console e PageSpeed após deploy
-
-## Recomendações para otimizar conversão
-1. Meça cliques em WhatsApp, envio válido de formulário e visitas às demonstrações (com consentimento quando necessário).
-2. Faça uma única mudança por experimento: título do hero, texto do CTA, plano destaque ou posição do formulário.
-3. Publique 2–3 estudos de caso verdadeiros com segmento, problema, solução, permissão de imagem e resultados verificáveis.
-4. Adicione uma pergunta de qualificação (prazo ou orçamento) apenas se não reduzir demais os contatos.
-5. Crie landing pages específicas por nicho quando houver demanda real e acompanhe conversões em vez de apenas acessos.
-6. Crie uma proposta e tempo de resposta comercial consistentes; não exiba prazos falsos no site.
-
-## Fontes oficiais
-- Cloudflare Direct Upload: https://developers.cloudflare.com/pages/get-started/direct-upload/
-- Cloudflare Custom Domains: https://developers.cloudflare.com/pages/configuration/custom-domains/
-- Web3Forms: https://docs.web3forms.com/getting-started/installation
+Nenhuma migração, serviço pago ou alteração em outro projeto é necessária para esta versão. Search Console, domínio comercial, dados legais e futuros cases reais dependem de decisões do proprietário.

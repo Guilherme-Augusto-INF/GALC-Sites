@@ -6,10 +6,12 @@
   const validPhone = /^\d{11,15}$/.test(cfg.whatsapp || '');
   $$('[data-brand]').forEach(el => el.textContent = cfg.brand || 'GALC-Sites');
   $$('[data-price]').forEach(el => el.textContent = cfg.prices?.[el.dataset.price] || 'Sob consulta');
-  $('#year').textContent = new Date().getFullYear();
+  const year = $('#year');
+  if (year) year.textContent = new Date().getFullYear();
   const email = $('#footerEmail');
   if (email) { const address = (cfg.email || '').trim(); if (address && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(address)) { email.href = `mailto:${address}`; email.textContent = address; email.hidden = false; } else { email.hidden = true; email.removeAttribute('href'); } }
-  if (cfg.instagram && /^https:\/\//.test(cfg.instagram)) { $('#instagramLink').href = cfg.instagram; $('#instagramLink').hidden = false; }
+  const instagram = $('#instagramLink');
+  if (instagram && cfg.instagram && /^https:\/\//.test(cfg.instagram)) { instagram.href = cfg.instagram; instagram.hidden = false; }
   $$('.whatsapp-link').forEach(a => {
     if (validPhone) { a.href = `https://wa.me/${cfg.whatsapp}?text=${encodeURIComponent(cfg.whatsappMessage || a.dataset.message || 'Olá! Gostaria de solicitar um orçamento.')}`; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
     else { a.href = '#contato'; a.title = 'Configure o WhatsApp no arquivo js/config.js'; }
@@ -21,19 +23,45 @@
     toggle.setAttribute('aria-label', expanded ? 'Abrir menu' : 'Fechar menu');
   });
   nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Abrir menu');}));
-  $$('.plan-action').forEach(a => a.addEventListener('click', () => {
-    const select = $('#projectType'); const plan = a.dataset.plan || '';
-    const known = [...select.options].find(opt => opt.value === plan);
-    if (known) select.value = known.value;
-    else select.value = 'Outro / Não sei ainda';
-    const message = $('textarea[name="message"]'); if (message && !message.value.trim()) message.value = `Tenho interesse em um site inspirado em: ${plan}.`;
-  }));
+  function closeMenu() {
+    nav?.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Abrir menu');
+  }
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') { closeMenu(); toggle.focus(); }
+  });
+  let generatedMessage = '';
+  function selectProject(plan) {
+    const select = $('#projectType'), message = $('textarea[name="message"]');
+    if (!select) return;
+    select.value = [...select.options].some(opt => opt.value === plan) ? plan : 'Outro / Não sei ainda';
+    if (message && (!message.value.trim() || message.value === generatedMessage)) {
+      generatedMessage = `Tenho interesse em: ${plan}.`;
+      message.value = generatedMessage;
+    }
+  }
+  $$('.plan-action').forEach(a => a.addEventListener('click', () => selectProject(a.dataset.plan || 'Outro / Não sei ainda')));
+  const models = { barbearia: 'Modelo Barbearia', restaurante: 'Modelo Restaurante', consultorio: 'Modelo Consultório' };
+  const requestedModel = new URLSearchParams(window.location.search).get('modelo');
+  if (Object.hasOwn(models, requestedModel)) selectProject(models[requestedModel]);
   const form = $('#contactForm'), feedback = $('#formFeedback'), accessInput = $('#formAccessKey');
   if (accessInput) accessInput.value = cfg.web3formsAccessKey || '';
+  const phoneInput = form?.querySelector('input[name="whatsapp"]');
+  function validatePhone() {
+    if (!phoneInput) return;
+    const value = phoneInput.value.trim(), digits = value.replace(/\D/g, '');
+    phoneInput.setCustomValidity(value && (!/^[+()\d\s.-]+$/.test(value) || digits.length < 10 || digits.length > 15) ? 'Informe um telefone válido com DDD (10 a 15 dígitos).' : '');
+  }
+  phoneInput?.addEventListener('input', validatePhone);
+  let sending = false;
   form?.addEventListener('submit', async event => {
     event.preventDefault();
+    if (sending) return;
+    validatePhone();
     if (!form.reportValidity()) return;
     if (!cfg.web3formsAccessKey) { feedback.textContent = 'Formulário ainda não configurado. Adicione a chave gratuita do Web3Forms em js/config.js ou entre em contato pelo WhatsApp.'; feedback.classList.add('error'); return; }
+    sending = true;
     const button = form.querySelector('button[type="submit"]'); button.disabled = true; button.textContent = 'Enviando...'; feedback.classList.remove('error'); feedback.textContent = 'Enviando sua mensagem...';
     try {
       const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), 12000);
@@ -44,17 +72,22 @@
       if (!response.ok || !data.success) throw new Error('Falha no envio');
       feedback.textContent = 'Mensagem enviada com sucesso! Entraremos em contato pelo número informado.';
       form.reset();
+      phoneInput?.setCustomValidity('');
+      generatedMessage = '';
       // O reset limpa campos hidden também; restaura a chave para um novo envio.
       if (accessInput) accessInput.value = cfg.web3formsAccessKey || '';
     } catch { feedback.textContent = 'Não foi possível enviar. Verifique sua conexão e tente novamente ou utilize o WhatsApp.'; feedback.classList.add('error'); }
-    finally { button.disabled = false; button.textContent = 'Enviar solicitação ↗'; }
+    finally { sending = false; button.disabled = false; button.textContent = 'Enviar solicitação ↗'; }
   });
   // Consentimento opcional: o banner NÃO ativa tags sem escolha explícita.
   const banner = $('#cookieBanner'); let consent;
   try { consent = localStorage.getItem('site-cookie-choice'); } catch { consent = null; }
   if (!consent && banner) banner.hidden = false;
   function injectScript(src) { const s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); }
+  let trackingLoaded = false;
   function loadOptionalTracking() {
+    if (trackingLoaded) return;
+    trackingLoaded = true;
     if (cfg.ga4Id && /^G-[A-Z0-9]+$/.test(cfg.ga4Id)) {
       injectScript(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(cfg.ga4Id)}`);
       window.dataLayer = window.dataLayer || []; window.gtag = function(){ window.dataLayer.push(arguments); };
@@ -67,7 +100,15 @@
     }
   }
   if (consent === 'accepted') loadOptionalTracking();
-  function choose(value) { try { localStorage.setItem('site-cookie-choice', value); } catch {} banner.hidden = true; if (value === 'accepted') loadOptionalTracking(); }
+  function choose(value) {
+    const previouslyAccepted = consent === 'accepted';
+    consent = value;
+    try { localStorage.setItem('site-cookie-choice', value); } catch {}
+    if (banner) banner.hidden = true;
+    if (value === 'accepted') loadOptionalTracking();
+    else if (previouslyAccepted && (cfg.ga4Id || cfg.metaPixelId)) window.location.reload();
+  }
+  $('#manageCookies')?.addEventListener('click', () => { if (banner) { banner.hidden = false; $('#rejectCookies')?.focus(); } });
   $('#acceptCookies')?.addEventListener('click', () => choose('accepted'));
   $('#rejectCookies')?.addEventListener('click', () => choose('rejected'));
 })();
