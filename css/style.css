@@ -36,3 +36,9 @@ h1,h2,h3{font-family:"Segoe UI",Arial,system-ui,sans-serif;letter-spacing:-.055e
 body:has(.legal) .header-inner{height:auto;min-height:78px;flex-wrap:wrap;gap:16px;padding-block:16px}
 
 .mock-phone-cta{display:inline-block}
+
+/* Contrastes identificados na auditoria Lighthouse. */
+.hero-trust{color:#4d5868}
+.browser-url,.mock-nav,.mock-stats span,.case-type{color:#566174}
+.dark-section .section-header.light .kicker{color:#adc0ff}
+.cta-inner>div>span{color:#fff}
