@@ -22,7 +22,7 @@
     toggle.setAttribute('aria-expanded', String(!expanded)); nav.classList.toggle('open', !expanded);
     toggle.setAttribute('aria-label', expanded ? 'Abrir menu' : 'Fechar menu');
   });
-  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Abrir menu');}));
+  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
   function closeMenu() {
     nav?.classList.remove('open');
     toggle?.setAttribute('aria-expanded', 'false');

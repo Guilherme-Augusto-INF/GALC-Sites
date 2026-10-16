@@ -20,7 +20,7 @@ js/main.js                 Navegação, planos, formulário e consentimento
 img/favicon.svg            Símbolo GALC-Sites
 img/og-image.png            Imagem de compartilhamento 1200 × 630
 img/og-image.svg            Versão vetorial da imagem de compartilhamento
- demos/                    Demonstrações de barbearia, restaurante e consultório
+demos/                    Demonstrações de barbearia, restaurante e consultório
 _headers                   Headers do Cloudflare Pages
 robots.txt                 Regras de rastreamento
 sitemap.xml                Apenas URLs indexáveis de produção
@@ -79,6 +79,10 @@ GA4 e Meta Pixel estão desativados enquanto seus IDs estiverem vazios. Só são
 `_headers` restringe frames, recursos externos, permissões de câmera/microfone/localização e tipos MIME. A CSP permite os endpoints usados pelo Web3Forms e pelas integrações opcionais existentes. Ao adicionar um fornecedor, revise a política e teste os fluxos antes de publicar.
 
 As páginas informativas precisam de revisão do responsável sobre identificação do controlador, critérios de retenção e atendimento a direitos. O texto não é certificação jurídica de conformidade com a LGPD.
+
+## Testes automatizados
+
+`node --test tests/form-flow.test.cjs` executa cenários isolados sem enviar dados ao Web3Forms e sem dependências. Esses testes não substituem a validação no navegador.
 
 ## Desenvolvimento e publicação
 
