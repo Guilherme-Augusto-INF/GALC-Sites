@@ -6,7 +6,12 @@ window.SITE_CONFIG = Object.freeze({
   email: '',
   instagram: '', // URL completa, opcional
   web3formsAccessKey: '0dafe593-cd69-49ee-ad43-5003c10c6cda', // Chave pública gratuita obtida em https://web3forms.com
-  prices: { basic: 'Sob consulta', pro: 'Sob consulta', store: 'Sob consulta' },
+  prices: {
+    basic: 'R$ 790', pro: 'R$ 1.490', store: 'R$ 3.490',
+    landing: 'R$ 990', prototype: 'R$ 250', additionalPage: 'R$ 150 a R$ 300',
+    maintenanceBasic: 'R$ 99', maintenanceContent: 'R$ 199',
+    hourly: 'R$ 60', minimumChange: 'R$ 90'
+  },
   ga4Id: '', // Ex.: G-XXXXXXXXXX
   metaPixelId: '' // Ex.: 1234567890
 });
