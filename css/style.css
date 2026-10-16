@@ -291,3 +291,5 @@ body:has(.legal) .header-inner{height:auto;min-height:78px;flex-wrap:wrap;gap:16
 
 /* Keep contact fields readable on narrow tablets. */
 @media(min-width:761px) and (max-width:980px){.contact-grid{grid-template-columns:1fr;gap:35px}.contact-copy>p{max-width:620px}.contact-note{margin-top:25px}}
+
+@media(max-width:760px){.form-row{grid-template-columns:1fr}}
