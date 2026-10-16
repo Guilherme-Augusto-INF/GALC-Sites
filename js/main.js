@@ -20,7 +20,7 @@
     toggle.setAttribute('aria-expanded', String(!expanded)); nav.classList.toggle('open', !expanded);
     toggle.setAttribute('aria-label', expanded ? 'Abrir menu' : 'Fechar menu');
   });
-  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false');}));
+  nav?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Abrir menu');}));
   $$('.plan-action').forEach(a => a.addEventListener('click', () => {
     const select = $('#projectType'); const plan = a.dataset.plan || '';
     const known = [...select.options].find(opt => opt.value === plan);
