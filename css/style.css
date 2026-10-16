@@ -288,3 +288,6 @@ body:has(.legal) .header-inner{height:auto;min-height:78px;flex-wrap:wrap;gap:16
 @media(max-width:760px){.hero{padding:48px 0 56px}.hero h1{font-size:clamp(39px,8.5vw,56px)}.hero-copy>p{font-size:16px}.project-sheet{padding:24px}.hero-trust span{white-space:normal}.delivery-grid{grid-template-columns:1fr;gap:36px}.delivery-grid h2{margin-top:0}}
 /* O menu mais longo da V2.1 usa o modo compacto também no tablet. */
 @media(min-width:761px) and (max-width:980px){.mobile-toggle{display:grid;gap:4px;border:0;background:transparent;padding:9px}.mobile-toggle span{height:2px;width:23px;background:var(--navy);display:block}.nav{display:none;position:absolute;top:78px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);padding:18px;flex-direction:column;align-items:stretch;gap:10px}.nav.open{display:flex}.nav>a{padding:10px}}
+
+/* Keep contact fields readable on narrow tablets. */
+@media(min-width:761px) and (max-width:980px){.contact-grid{grid-template-columns:1fr;gap:35px}.contact-copy>p{max-width:620px}.contact-note{margin-top:25px}}
