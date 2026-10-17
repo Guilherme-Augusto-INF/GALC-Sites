@@ -102,3 +102,11 @@ html[data-theme="dark"] ::selection{background:#a8beff;color:#10151e}
   html[data-theme="dark"] .mobile-toggle span{background:var(--ink)}
 }
 @media(max-width:760px){html[data-theme="dark"] .project-sheet{box-shadow:none}}
+
+/* Keep the legal header compact when the return link needs a second row. */
+@media(max-width:600px){
+  body:has(.legal) .header-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px;padding-block:12px}
+  body:has(.legal) .header .brand{grid-column:1;grid-row:1}
+  body:has(.legal) .header-controls{grid-column:2;grid-row:1}
+  body:has(.legal) .header .text-link{grid-column:1/-1;grid-row:2;justify-self:start}
+}
