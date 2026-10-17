@@ -1,0 +1,104 @@
+/* Display theme: the approved light palette remains the default. */
+:root{
+  color-scheme:light;
+  --theme-bg:#fff;--theme-surface:#fff;--theme-soft:#f7f6f2;
+  --theme-field:#fafbfd;--theme-line:#d9dee6;--theme-copy:#4d5868;
+  --theme-accent:#355bee;--theme-action:#355bee;--theme-action-hover:#2143c8;
+  --theme-header:rgba(255,255,255,.97);--theme-selected:#f0f3ff;
+}
+.header-inner{gap:16px}
+.header-controls{display:flex;align-items:center;gap:6px;flex:none}
+.theme-toggle{display:grid;place-items:center;width:44px;height:44px;flex:none;border:1px solid var(--theme-line);border-radius:7px;background:var(--theme-surface);color:var(--ink);padding:10px}
+.theme-toggle:hover{border-color:var(--theme-accent)}
+.theme-toggle svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.theme-sun{display:none}
+html[data-theme="dark"] .theme-moon{display:none}
+html[data-theme="dark"] .theme-sun{display:block}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --theme-bg:#10151e;--theme-surface:#1a2230;--theme-soft:#151c27;
+  --theme-field:#111923;--theme-line:#465366;--theme-copy:#bec8d8;
+  --theme-accent:#a8beff;--theme-header:rgba(16,21,30,.97);--theme-selected:#263658;
+  --ink:#f0f3f9;--muted:#b4c0d2;--soft:var(--theme-soft);
+  --border:var(--theme-line);--blue:var(--theme-accent);
+}
+html[data-theme="dark"] body{background:var(--theme-bg);color:var(--ink)}
+html[data-theme="dark"] .header{background:var(--theme-header);border-color:var(--theme-line)}
+html[data-theme="dark"] .brand-logo{background:#fff;padding:3px;border-radius:7px}
+html[data-theme="dark"] .hero,
+html[data-theme="dark"] .section-soft,
+html[data-theme="dark"] #servicos,
+html[data-theme="dark"] .contact-section,
+html[data-theme="dark"] .quote-simulator{background:var(--theme-soft)}
+html[data-theme="dark"] .hero::after{background:var(--theme-line)}
+html[data-theme="dark"] .hero-copy>p,
+html[data-theme="dark"] .hero-trust,
+html[data-theme="dark"] .sheet-top,
+html[data-theme="dark"] .project-sheet dd,
+html[data-theme="dark"] .sheet-note,
+html[data-theme="dark"] .plans .plan-limit,
+html[data-theme="dark"] .pricing-conditions,
+html[data-theme="dark"] .scope-notes,
+html[data-theme="dark"] .extra-services>div>p,
+html[data-theme="dark"] .extras-list small,
+html[data-theme="dark"] .sim-intro>p,
+html[data-theme="dark"] .sim-card small,
+html[data-theme="dark"] .sim-disclaimer,
+html[data-theme="dark"] .checkbox-consent,
+html[data-theme="dark"] .legal p,
+html[data-theme="dark"] .legal li{color:var(--theme-copy)}
+html[data-theme="dark"] .case-type,
+html[data-theme="dark"] .muted-head{color:var(--muted)}
+html[data-theme="dark"] .project-sheet,
+html[data-theme="dark"] .plan,
+html[data-theme="dark"] .contact-form,
+html[data-theme="dark"] .sim-card,
+html[data-theme="dark"] .cookie-banner{background:var(--theme-surface);border-color:var(--theme-line)}
+html[data-theme="dark"] .project-sheet{border-top-color:var(--theme-accent);box-shadow:10px 12px 0 #090e16}
+html[data-theme="dark"] .project-sheet dl>div:hover{background:var(--theme-selected)}
+html[data-theme="dark"] .project-sheet::after,
+html[data-theme="dark"] .hero-trust,
+html[data-theme="dark"] .extra-services,
+html[data-theme="dark"] .plan .price,
+html[data-theme="dark"] .sim-plans label,
+html[data-theme="dark"] .sim-check,
+html[data-theme="dark"] .sim-pages-label,
+html[data-theme="dark"] .steps article,
+html[data-theme="dark"] .round-arrow{border-color:var(--theme-line)}
+html[data-theme="dark"] .plan.featured{border-color:var(--theme-accent)}
+html[data-theme="dark"] .plan:hover{border-color:var(--theme-accent)}
+html[data-theme="dark"] .primary,
+html[data-theme="dark"] .featured-ribbon,
+html[data-theme="dark"] .nav-cta{background:var(--theme-action);color:#fff}
+html[data-theme="dark"] .primary:hover,
+html[data-theme="dark"] .nav-cta:hover{background:var(--theme-action-hover);color:#fff}
+html[data-theme="dark"] .outline,
+html[data-theme="dark"] .whatsapp-outline{background:var(--theme-surface);color:var(--ink);border-color:var(--theme-line)}
+html[data-theme="dark"] .text-link{color:var(--theme-accent)}
+html[data-theme="dark"] .contact-form input:not([type=checkbox]),
+html[data-theme="dark"] .contact-form select,
+html[data-theme="dark"] .contact-form textarea,
+html[data-theme="dark"] .sim-pages-label select{background:var(--theme-field);color:var(--ink);border-color:var(--theme-line)}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder{color:#aab6c9;opacity:1}
+html[data-theme="dark"] .phone-hint{color:var(--theme-copy)!important}
+html[data-theme="dark"] .form-feedback.error{color:#ffb4b4}
+html[data-theme="dark"] .sim-plans label:has(input:checked){background:var(--theme-selected);border-color:var(--theme-accent)}
+html[data-theme="dark"] .sim-card input[type=radio],
+html[data-theme="dark"] .sim-card input[type=checkbox]{accent-color:var(--theme-accent)}
+html[data-theme="dark"] .sim-result{background:#0b111b;border:1px solid var(--theme-line)}
+html[data-theme="dark"] .steps article>span{color:var(--theme-accent)}
+html[data-theme="dark"] .cta-band{background:#263c90}
+html[data-theme="dark"] .round-arrow:hover{background:#355bee;color:#fff}
+html[data-theme="dark"] :focus-visible,
+html[data-theme="dark"] .button:focus-visible,
+html[data-theme="dark"] .showcase a:focus-visible,
+html[data-theme="dark"] .nav a:focus-visible{outline-color:#a8beff}
+html[data-theme="dark"] ::selection{background:#a8beff;color:#10151e}
+@media(max-width:980px){
+  .header-inner{gap:10px}
+  .header-controls .mobile-toggle{width:44px;min-height:44px;align-content:center;justify-content:center;padding:9px}
+  html[data-theme="dark"] .nav{background:var(--theme-surface)}
+  html[data-theme="dark"] .mobile-toggle span{background:var(--ink)}
+}
+@media(max-width:760px){html[data-theme="dark"] .project-sheet{box-shadow:none}}
