@@ -24,7 +24,7 @@ html[data-theme="dark"]{
 }
 html[data-theme="dark"] body{background:var(--theme-bg);color:var(--ink)}
 html[data-theme="dark"] .header{background:var(--theme-header);border-color:var(--theme-line)}
-html[data-theme="dark"] .brand-logo{background:#fff;padding:3px;border-radius:7px}
+html[data-theme="dark"] .brand-logo{background:transparent;padding:0;border-radius:0}
 html[data-theme="dark"] .hero,
 html[data-theme="dark"] .section-soft,
 html[data-theme="dark"] #servicos,
