@@ -110,3 +110,13 @@ html[data-theme="dark"] ::selection{background:#a8beff;color:#10151e}
   body:has(.legal) .header-controls{grid-column:2;grid-row:1}
   body:has(.legal) .header .text-link{grid-column:1/-1;grid-row:2;justify-self:start}
 }
+
+/* Form boundaries remain identifiable against both dark surfaces. */
+html[data-theme="dark"]{--theme-control-line:#718096}
+html[data-theme="dark"] .theme-toggle,
+html[data-theme="dark"] .sim-plans label,
+html[data-theme="dark"] .contact-form input:not([type=checkbox]),
+html[data-theme="dark"] .contact-form select,
+html[data-theme="dark"] .contact-form textarea,
+html[data-theme="dark"] .sim-pages-label select{border-color:var(--theme-control-line)}
+html[data-theme="dark"] .sim-plans label:has(input:checked){border-color:var(--theme-accent)}
