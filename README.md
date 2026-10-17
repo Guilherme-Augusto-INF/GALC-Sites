@@ -1,4 +1,4 @@
-# GALC-Sites — V2.2
+# GALC-Sites — V2.5
 
 Site institucional estático para apresentar serviços de desenvolvimento web, demonstrar possibilidades e receber solicitações de orçamento.
 
@@ -18,8 +18,8 @@ css/demo.css               Base compartilhada e layouts próprios dos três segm
 js/config.js               Marca, WhatsApp, Web3Forms, preços e tracking opcional
 js/main.js                 Navegação, planos, formulário e consentimento
 img/favicon.svg            Símbolo GALC-Sites
-img/og-image.png            Imagem de compartilhamento 1200 × 630
-img/og-image.svg            Versão vetorial da imagem de compartilhamento
+img/og-image-v25.png        Imagem oficial de compartilhamento 1200 × 630
+img/galc-symbol-v25-96.png  Símbolo otimizado para cabeçalho e rodapé
 demos/                    Demonstrações de barbearia, restaurante e consultório
 _headers                   Headers do Cloudflare Pages
 robots.txt                 Regras de rastreamento
@@ -108,3 +108,13 @@ Abra `http://localhost:8000`. O servidor local não aplica `_headers`: valide os
 8. Execute smoke tests na URL de produção. Em regressão grave, reverta por novo commit ou rollback do deployment, preservando o histórico.
 
 Nenhuma migração, serviço pago ou alteração em outro projeto é necessária para esta versão. Search Console, domínio comercial, dados legais e futuros cases reais dependem de decisões do proprietário.
+
+## Identidade oficial V2.5
+
+A marca oficial usa o símbolo G azul/ciano fornecido pelo proprietário. Os três PNGs originais em img/ são preservados. O arquivo chamado horizontal tem composição quase quadrada (1227 × 1226); não deve ser comprimido no cabeçalho.
+
+Cabeçalho e páginas legais usam galc-symbol-v25-96.png com o nome em texto. A imagem tem width/height explícitos, 44 px no desktop e 40 px no mobile. Rodapé mantém nome branco e uma base clara sob o símbolo para contraste. Os nomes e desenhos das demonstrações permanecem intactos.
+
+Favicons PNG 32/64 px, Apple Touch Icon 180 px e og-image-v25.png (1200 × 630) são derivados do original, sem recriação por IA. Apenas margens transparentes são aparadas antes do redimensionamento proporcional. Os arquivos com versão no nome têm cache de um ano; mudanças futuras exigem novo nome.
+
+O script tools/build_brand_assets.py usa Pillow somente para preparar imagens fora do frontend. Não é uma dependência do site. A V2.4 e seu simulador permanecem presentes; JavaScript, configuração de contato e preços não foram alterados nesta aplicação de marca.

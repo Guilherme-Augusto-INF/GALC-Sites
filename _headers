@@ -6,3 +6,18 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 
   Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self'; img-src 'self' data: https://*.google-analytics.com https://www.facebook.com; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://www.facebook.com; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action https://api.web3forms.com
+
+/img/galc-symbol-v25-96.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/favicon-v25-32.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/favicon-v25-64.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/apple-touch-icon-v25.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/og-image-v25.png
+  Cache-Control: public, max-age=31536000, immutable
