@@ -17,7 +17,7 @@ jobs:
       - name: Validate files and deployed image headers
         run: |
           python3 - <<'PY'
-          import json, struct, urllib.request
+          import json, struct, subprocess
           from pathlib import Path
           for path in ["index.html","privacidade.html","termos.html"]:
               text=Path(path).read_text()
@@ -28,11 +28,14 @@ jobs:
               data=Path("img",name).read_bytes()
               assert data[:8]==bytes([137,80,78,71,13,10,26,10])
               assert struct.unpack(">II",data[16:24])==expected
-              req=urllib.request.Request("https://0467eb07.galc-sites.pages.dev/img/"+name,method="HEAD")
-              with urllib.request.urlopen(req,timeout=20) as response:
-                  ttl=response.headers.get("Cache-Control","")
-                  assert response.status==200
-                  assert "31536000" in ttl and "immutable" in ttl,ttl
-                  assert response.headers.get_content_type()=="image/png"
-                  print("RESOURCE_CHECK="+json.dumps({"path":name,"status":response.status,"cache":ttl,"bytes":len(data),"size":expected}))
+              result=subprocess.run(["curl","--silent","--show-error","--head","--max-time","20","https://0467eb07.galc-sites.pages.dev/img/"+name],check=True,capture_output=True,text=True)
+              block=result.stdout.strip().split("\n\n")[-1]
+              lines=block.splitlines()
+              status=int(lines[0].split()[1])
+              headers={k.lower():v.strip() for line in lines[1:] if ":" in line for k,v in [line.split(":",1)]}
+              ttl=headers.get("cache-control","")
+              assert status==200, result.stdout
+              assert "31536000" in ttl and "immutable" in ttl,ttl
+              assert headers.get("content-type","").startswith("image/png")
+              print("RESOURCE_CHECK="+json.dumps({"path":name,"status":status,"cache":ttl,"bytes":len(data),"size":expected}))
           PY
