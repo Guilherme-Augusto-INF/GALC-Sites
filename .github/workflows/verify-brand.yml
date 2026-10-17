@@ -1,0 +1,38 @@
+name: Verify official GALC brand
+on:
+  push:
+    branches: [feat/galc-v2-5-official-logo]
+    paths: [.github/workflows/verify-brand.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: node --test tests/form-flow.test.cjs
+      - name: Validate files and deployed image headers
+        run: |
+          python3 - <<'PY'
+          import json, struct, urllib.request
+          from pathlib import Path
+          for path in ["index.html","privacidade.html","termos.html"]:
+              text=Path(path).read_text()
+              assert "brand-symbol" not in text, path
+              assert "galc-symbol-v25-96.png" in text, path
+          assert 'id="quoteSimulator"' in Path("index.html").read_text()
+          for name,expected in [("galc-symbol-v25-96.png",(96,96)),("favicon-v25-32.png",(32,32)),("favicon-v25-64.png",(64,64)),("apple-touch-icon-v25.png",(180,180)),("og-image-v25.png",(1200,630))]:
+              data=Path("img",name).read_bytes()
+              assert data[:8]==b"\\x89PNG\\r\\n\\x1a\\n"
+              assert struct.unpack(">II",data[16:24])==expected
+              req=urllib.request.Request("https://0467eb07.galc-sites.pages.dev/img/"+name,method="HEAD")
+              with urllib.request.urlopen(req,timeout=20) as response:
+                  ttl=response.headers.get("Cache-Control","")
+                  assert response.status==200
+                  assert "31536000" in ttl and "immutable" in ttl,ttl
+                  assert response.headers.get_content_type()=="image/png"
+                  print("RESOURCE_CHECK="+json.dumps({"path":name,"status":response.status,"cache":ttl,"bytes":len(data),"size":expected}))
+          PY
