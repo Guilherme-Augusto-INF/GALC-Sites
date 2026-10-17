@@ -26,7 +26,7 @@ jobs:
           assert 'id="quoteSimulator"' in Path("index.html").read_text()
           for name,expected in [("galc-symbol-v25-96.png",(96,96)),("favicon-v25-32.png",(32,32)),("favicon-v25-64.png",(64,64)),("apple-touch-icon-v25.png",(180,180)),("og-image-v25.png",(1200,630))]:
               data=Path("img",name).read_bytes()
-              assert data[:8]==b"\\x89PNG\\r\\n\\x1a\\n"
+              assert data[:8]==bytes([137,80,78,71,13,10,26,10])
               assert struct.unpack(">II",data[16:24])==expected
               req=urllib.request.Request("https://0467eb07.galc-sites.pages.dev/img/"+name,method="HEAD")
               with urllib.request.urlopen(req,timeout=20) as response:
