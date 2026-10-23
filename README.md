@@ -68,7 +68,7 @@ Referências consultadas:
 
 ## SEO
 
-Canonical, Open Graph e sitemap usam https://galc-sites.pages.dev/. A home é indexável. Páginas informativas ficam fora do sitemap por serem `noindex,follow`; demos são `noindex,nofollow`.
+Canonical, Open Graph e sitemap usam https://galc-sites.pages.dev/. A home é indexável. Páginas informativas ficam fora do sitemap por serem `noindex,follow`; demos são `noindex,nofollow`. O título, a descrição e o conteúdo inicial da home devem refletir criação e desenvolvimento de sites com atendimento online em todo o estado de São Paulo. Não invente endereço físico nem crie páginas locais sem conteúdo útil e serviço real.
 
 O JSON-LD descreve um **Service**, com o provedor **Organization** GALC-Sites. Não utiliza endereço, horário físico, avaliações, preço, CNPJ ou profissional inventado. `ProfessionalService` é depreciado no Schema.org e não é usado nesta versão.
 
