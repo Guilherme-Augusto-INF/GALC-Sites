@@ -26,7 +26,7 @@ def font(size,bold=False):
 draw.text((458,160),"GALC-Sites",font=font(68,True),fill="#151a23")
 draw.text((462,274),"Sites para",font=font(40),fill="#151a23")
 draw.text((462,330),"pequenos negocios.".replace("negocios","negócios"),font=font(40),fill="#355bee")
-draw.text((88,544),"galc-sites.pages.dev",font=font(27),fill="#4d5868")
+draw.text((88,544),"galsites.pages.dev",font=font(27),fill="#4d5868")
 canvas.save(root/"og-image-v25.png",optimize=True);outputs.append(root/"og-image-v25.png")
 metadata={"source_size":source.size,"source_bytes":(root/"galc-logo-icon.png").stat().st_size,"alpha_extrema":alpha.getextrema(),"bbox":bbox,"outputs":[{"path":str(p),"bytes":p.stat().st_size,"size":Image.open(p).size} for p in outputs]}
 print("BRAND_METADATA="+json.dumps(metadata))
