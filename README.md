@@ -2,7 +2,7 @@
 
 Site institucional estático para apresentar serviços de desenvolvimento web, demonstrar possibilidades e receber solicitações de orçamento.
 
-- Produção: https://galc-sites.pages.dev/
+- Domínio canônico pretendido: https://galsites.pages.dev/ (ativação pendente de verificação no Cloudflare Pages)
 - Repositório: https://github.com/Guilherme-Augusto-INF/GALC-Sites
 - HTML, CSS e JavaScript puro. Sem build, framework ou bibliotecas de terceiros no frontend.
 - Cloudflare Pages com integração GitHub; produção na branch `main`, demais branches em preview.
@@ -68,9 +68,9 @@ Referências consultadas:
 
 ## SEO
 
-Canonical, Open Graph e sitemap usam https://galc-sites.pages.dev/. A home é indexável. Páginas informativas ficam fora do sitemap por serem `noindex,follow`; demos são `noindex,nofollow`. O título, a descrição e o conteúdo inicial da home devem refletir criação e desenvolvimento de sites com atendimento online em todo o estado de São Paulo. Não invente endereço físico nem crie páginas locais sem conteúdo útil e serviço real.
+Canonical, Open Graph, dados estruturados, `robots.txt` e sitemap usam https://galsites.pages.dev/. A home é indexável. Páginas informativas ficam fora do sitemap por serem `noindex,follow`; demos são `noindex,nofollow`. A nova origem ainda depende de deploy e verificação externa. O título, a descrição e o conteúdo inicial da home refletem criação de sites para pequenos negócios com atendimento online em todo o estado de São Paulo. Não invente endereço físico nem crie páginas locais sem conteúdo útil e serviço real. Consulte `docs/seo-indexacao.md` para o redirecionamento de host e os passos manuais de indexação.
 
-O JSON-LD descreve um **Service**, com o provedor **Organization** GALC-Sites. Não utiliza endereço, horário físico, avaliações, preço, CNPJ ou profissional inventado. `ProfessionalService` é depreciado no Schema.org e não é usado nesta versão.
+O JSON-LD descreve **Organization**, **WebSite** e **Service** com informações existentes no projeto. Não utiliza endereço, horário físico, avaliações, preço, CNPJ ou profissional inventado. `ProfessionalService` é depreciado no Schema.org e não é usado nesta versão.
 
 Cloudflare Pages adiciona `X-Robots-Tag: noindex` aos previews por padrão. Preserve esse comportamento. Meça SEO em produção; não tente elevar a nota do preview removendo sua proteção. Indexabilidade técnica não garante indexação nem posição no Google.
 
