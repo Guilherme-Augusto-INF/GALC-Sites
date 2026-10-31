@@ -2,7 +2,7 @@
 
 Site institucional estático para apresentar serviços de desenvolvimento web, demonstrar possibilidades e receber solicitações de orçamento.
 
-- Domínio canônico pretendido: https://galsites.pages.dev/ (ativação pendente de verificação no Cloudflare Pages)
+- Domínio canônico pretendido: https://galcsites.pages.dev/ (ativação pendente de verificação no Cloudflare Pages)
 - Repositório: https://github.com/Guilherme-Augusto-INF/GALC-Sites
 - HTML, CSS e JavaScript puro. Sem build, framework ou bibliotecas de terceiros no frontend.
 - Cloudflare Pages com integração GitHub; produção na branch `main`, demais branches em preview.
